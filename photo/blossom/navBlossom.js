@@ -1,0 +1,27 @@
+var menu='\
+<h4><a href="index.html"> Цветы</a></h4>\
+  <p><a href="plum-flower.html"> Цветущая слива</a></p>\
+  <p><a href="rose-flower.html"> Садовый георгин</a></p>\
+  <p><a href="mothy.html"> Прозрачная мошка</a></p>\
+  <p><a href="foalfoot.html"> Мать и мачеха</a></p>\
+  <p><a href="flowering.html"> Черёмуха</a></p>\
+  <p><a href="sunny-dandelion.html"> Солнечный цветок</a></p>\
+  <p><a href="blowball.html"> Большой одуванчик</a></p>\
+  <p><a href="violet-flower.html"> Герань лесная</a></p>\
+  <p><a href="buttercup.html"> Лютик</a></p>\
+  <p><a href="clover.html"> Цветок клевера</a></p>\
+<h4><a href="../plant/index.html"> Другие растения</a></h4>';
+
+var menuen='\
+<h4><a href="en.html"> Flowers</a></h4>\
+  <p><a href="plum-flower-en.html"> Plum flowers</a></p>\
+  <p><a href="buttercup-en.html"> Buttercup</a></p>\
+  <p><a href="blowball-en.html"> Big blowball</a></p>\
+  <p><a href="mothy-en.html"> A moth</a></p>\
+  <p><a href="rose-flower-en.html"> Dahlia</a></p>\
+  <p><a href="foalfoot-en.html"> Foalfoot</a></p>\
+  <p><a href="clover-en.html"> Clover</a></p>\
+  <p><a href="sunny-dandelion-en.html"> Sun dandelon</a></p>\
+  <p><a href="flowering-en.html"> Bird cherry tree</a></p>\
+  <p><a href="violet-flower-en.html"> Geranium</a></p>\
+<h4><a href="../plant/en.html"> Other plants</a></h4>';
