@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+ <head>
+  <title> AxisVideo - видеонаблюдение с камерами Axis </title>
+  <meta content="Простая программа: только Windows, только камеры Axis, минимум настроек." name="description">
+  <meta content="видеонаблюдение," name="keywords">
+  <meta content="Евгений Корниенко" name="author">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta charset="utf-8">
+  <link href="https://cord70.github.io/photo/workshop/pro/axisvideo.html" rel="canonical">
+  <link href="https://cord70.github.io/photo/favicon.svg" rel="icon" sizes="any" type="image/svg+xml">
+  <link href="../../images/main.css" rel="stylesheet">
+  <script defer="" src="navPro.js"> </script>
+  <script defer="" src="../../images/ansimeta.js"> </script>
+ </head>
+ <body>
+
+  <header>
+  </header>
+
+  <main>
+
+   <h1> AxisVideo </h1>
+
+   <h4> Требования к системе </h4>
+
+   <p> Windows 10 </p>
+
+   <p> Для предыдущих версий Windows убедитесь, что установлен .NET
+            Framework 4 (Client Profile) </p>
+
+   <h4> Установка </h4>
+
+   <p> - распаковать AMC.zip </p>
+
+   <p> - установить AMC: AXISMediaControlSDK_redist.exe </p>
+
+   <p> - распаковать AxisVideo_xxxx.zip например в c:\temp
+    <br> путь не должен содержать русских букв и пробелов </p>
+
+   <p> - установить: setup.exe </p>
+
+   <p> - согласиться на непроверенного издателя </p>
+
+   <p> - согласиться на допуск программы AxisVideo к сети </p>
+
+   <h4> Первая настройка программы </h4>
+
+   <p> - запустиь AxisVideo </p>
+
+   <p> - Camera-AddCamera </p>
+
+   <p> - в строке камеры клик по номеру 00 (у следующих камер будет
+            01 02 и тд) </p>
+
+   <p> - ввести IP камеры </p>
+
+   <p> - В поле после номера 00 вписать имя камеры </p>
+
+   <p> - Camera-AddCamera и т.д. </p>
+
+   <p> - File-SaveSettings </p>
+
+   <h4> Настройка положения окна видео </h4>
+
+   <p> - Show.
+            Если в настройках камеры не разрешен анонимный просмотр, то видео не будет </p>
+
+   <p> - Изменить размер окна и переместить </p>
+
+   <p> - File-SaveSettings </p>
+
+   <h4> Настройка fps и разрешения </h4>
+
+   <p> - Camera-fps-2 </p>
+
+   <p> - в строке камеры в поле Res вписать, например: 640x480
+    <br> камера должна поддерживать разрешение в указаном формате </p>
+
+   <p> - File-SaveSettings </p>
+
+   <h4> Дальнейшие настройки </h4>
+
+   <p> - Help-Setup-ava </p>
+
+   <p> - Help-AxisPassword- ввести пароль к камерам (пароль пользователя
+            root).
+    <br> Логин и пароль должны быть одинаковыми для всех камер.
+    <br> Если разрешен анонимный просмотр (и PTZ), то пароль не требуется.
+    <br> Если логин отличается от root, то логин нужно внести вручную
+            в файл настройки AxisVideo.xml
+    <br> Например user="admin" </p>
+
+   <p> - Перезапуск программы </p>
+
+   <p> - Если
+    <br> - в настройках камеры есть Enable FTP server
+    <br> - и "пароль к камерам" подходит к FTP
+    <br> - и введен пароль настройщика (Help-Setup-ava)
+    <br> то
+    <br> - Разрешение можно выбрать из списка.
+    <br> - После поля Res показан тип камеры. Клик по типу камеры
+            запускает броузер </p>
+
+   <p> - File-SaveSettings </p>
+
+   <h4> Видеопоток </h4>
+
+   <p> - Camera-MediaType-mjpeg
+    <br> Все камеры должны поддерживать одинаковый видеопоток. </p>
+
+   <p> - File-SaveSettings </p>
+
+   <p> Проблемы с драйверами видеопотоков может решить программа AxisStreamingAssistantSetup.msi </p>
+
+   <p> Потоки mpeg4 и h264 могут стабильнее работать при небольшом
+            fps. </p>
+
+   <h4> Лицензия </h4>
+
+   <p> Без лицензии через 1 час
+    <br> - отключается видео для камер 04 и далее
+    <br> - для показа всех камер нужно перезапустить программу </p>
+
+   <h4> Ввод лицензии </h4>
+
+   <p> - Help-About- в нижнее поле вводим лицезионный ключ
+    <b> +s-eveuenev </b> (use copy-past) </p>
+
+   <p> - перезапуск программы </p>
+
+   <p> - если ключ принят то поле ввода ключа неактивно </p>
+
+   <p> - указанный ключ действует до января 2018 года </p>
+
+   <p> - лицензия действует на данном компьютере для данного пользователя </p>
+
+   <p> <a href="../../post/email.html" rel="author" title="email и копирайт">
+     Евгений Корниенко </a> </p>
+  </main>
+
+  <div id="menu">
+  </div>
+
+  <div class="cr">
+   &nbsp;
+  </div>
+
+  <div class="foot1 ref">
+   <div class="cr">
+    &nbsp;
+   </div>
+
+   <p> downloads: </p>
+
+   <p> <a href="../../axisvideo/AMC.zip">
+     AMC_SDK </a> </p>
+
+   <p> <a href="../../axisvideo/AxisStreamingAssistantSetup.msi">
+     AxisStreamingAssistantSetup </a> </p>
+
+   <p> <a href="../../axisvideo/AxisVideo_1_0_1_4.zip">
+     AxisVideo setup </a> </p>
+  </div>
+
+  <footer>
+  </footer>
+
+  <noscript>
+   <div>
+    
+   </div> </noscript>
+ </body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+ <head>
+  <title> ReplaceStr Замена подстроки в тексте </title>
+  <meta content="Оказалось, что при большом числе замен функция AnsiReplaceStr работает медленно. Это можно исправить." name="description">
+  <meta content="делфи, парсинг, подстрока, программирование," name="keywords">
+  <meta content="Евгений Корниенко" name="author">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta charset="utf-8">
+  <link href="https://cord70.github.io/photo/workshop/pro/ReplaceStr.html" rel="canonical">
+  <link href="https://cord70.github.io/photo/favicon.svg" rel="icon" sizes="any" type="image/svg+xml">
+  <link href="../../images/main.css" rel="stylesheet">
+  <script defer="" src="navPro.js"> </script>
+  <script defer="" src="../../images/ansimeta.js"> </script>
+ </head>
+ <body>
+
+  <header>
+  </header>
+
+  <main>
+   <p class="headquote">
+    Некоторые обычные операции со строками и
+            динамическими массивами можно делать в 100 раз быстрее. </p>
+
+   <h2> ReplaceStr </h2>
+
+   <p> Функции замены подстроки
+    <code class="sel big">
+     AnsiReplaceStr
+    </code>
+    и
+    <code class="sel big">
+     AnsiReplaceText
+    </code>
+    работают
+            довольно медленно для текстов размером сотни килобайт c тысячами
+            замен подстроки. Узкое место оказалась в медленном сложении строк
+            типа
+    <br> <code class="sel">
+     LongText := LongText + ShortText
+    </code> </p>
+
+   <p> В этой операции для новой более длинной строки выделяется
+            необходимое количество памяти. Опыт показал, что обработка текста
+            значительно ускоряется, если выделять память не тысячи раз, а
+            всю память заранее, или всего несколько раз. Так работает выделнение
+            памяти в классе
+    <code class="sel big">
+     TList
+    </code>
+    , но в
+    <code class="sel big">
+     AnsiReplaceStr
+    </code>
+    оптимизация выделения
+            памяти не используется. </p>
+
+   <p> Сначала создадим отдельный класс для хранения строки. </p>
+
+   <p class="sel">
+    <code>
+     TWideString = class
+     <br> private
+     <br> &nbsp; FText: WideString;
+     <br> &nbsp; LenText: Integer; //index of the last char
+     <br> &nbsp; CurrentLenText: Integer; //actual length от FText
+     <br> &nbsp; SpareLen: Integer;
+     <br> &nbsp; function GetText: WideString;
+     <br> &nbsp; procedure SetText(const Text: WideString);
+     <br> public
+     <br> &nbsp; procedure Append(C: WideString);
+     <br> &nbsp; property Text: WideString read GetText write SetText;
+     <br> &nbsp; property Length:Integer read LenText;
+     <br> end;
+     <br> <br> function TWideString.GetText: WideString;
+     <br> begin
+     <br> &nbsp; CurrentLenText := LenText;
+     <br> &nbsp; SetLength(FText, CurrentLenText);
+     <br> &nbsp; {result}GetText := FText;
+     <br> end;
+     <br> <br> procedure TWideString.SetText(const Text: WideString);
+     <br> begin
+     <br> &nbsp; FText := Text;
+     <br> &nbsp; LenText := Length(Text);
+     <br> &nbsp; CurrentLenText := LenText;
+     <br> end;
+     <br> <br> procedure TWideString.Append(C: WideString);
+     <br> var i, LenC: integer;
+     <br> begin
+     <br> &nbsp; LenC := Length(C);
+     <br> &nbsp; if LenText + LenC &gt; CurrentLenText then
+     <br> &nbsp; begin
+     <br> &nbsp;&nbsp; SpareLen := max(SpareLen, CurrentLenText);
+     <br> &nbsp;&nbsp; CurrentLenText := LenText + LenC + SpareLen;
+     <br> &nbsp;&nbsp; SetLength(FText, CurrentLenText);
+     <br> &nbsp; end;
+     <br> &nbsp; for i := 1 to LenC do
+     <br> &nbsp; begin
+     <br> &nbsp;&nbsp; inc(LenText);
+     <br> &nbsp;&nbsp; FText[LenText] := C[i];
+     <br> &nbsp; end;
+     <br> end;
+    </code> </p>
+
+   <p> Для поиска подстроки требуется функция
+    <code class="sel big">
+     PosEx
+    </code>
+    , но в Delphi7 она неправильно работает со строками
+    <code class="sel big">
+     WideString
+    </code>
+    . Поэтому используем
+            функцию
+    <code class="sel big">
+     WidePosEx
+    </code>
+    . </p>
+
+   <p class="sel">
+    <code>
+     function WidePosEx(const SubStr, S: WideString;
+                Offset: Integer): Integer;
+     <br> var i, X, Len, LenSubStr, Res: Integer;
+     <br> begin
+     <br> &nbsp; if Offset = 1 then Res := Pos(SubStr, S) else
+     <br> &nbsp; begin
+     <br> &nbsp; i := Offset;
+     <br> &nbsp; LenSubStr := Length(SubStr);
+     <br> &nbsp; Len := Length(S) - LenSubStr + 1;
+     <br> &nbsp; while i &lt;= Len do
+     <br> &nbsp; begin
+     <br> &nbsp;&nbsp; if S[i] = SubStr[1] then
+     <br> &nbsp;&nbsp; begin
+     <br> &nbsp;&nbsp;&nbsp; X := 1;
+     <br> &nbsp;&nbsp;&nbsp; while (X &lt; LenSubStr) and (S[i + X]
+                = SubStr[X + 1]) do Inc(X);
+     <br> &nbsp;&nbsp;&nbsp; if (X = LenSubStr) then
+     <br> &nbsp;&nbsp;&nbsp; begin
+     <br> &nbsp;&nbsp;&nbsp;&nbsp; Res := i;
+     <br> &nbsp;&nbsp;&nbsp;&nbsp; {result}WidePosEx := Res;
+     <br> &nbsp;&nbsp;&nbsp;&nbsp; exit;
+     <br> &nbsp;&nbsp;&nbsp; end;
+     <br> &nbsp;&nbsp; end;
+     <br> &nbsp;&nbsp; Inc(i);
+     <br> &nbsp; end;
+     <br> &nbsp; Res := 0;
+     <br> &nbsp; end;
+     <br> &nbsp; {result}WidePosEx := Res;
+     <br> end;
+    </code> </p>
+
+   <p> Наконец, можно написать функцию замены подстроки. </p>
+
+   <p class="sel">
+    <code>
+     function ReplaceStr(const Source, oldStr,
+                newStr: WideString): WideString;
+     <br> var PosOfOldStr, PosOfNextSearch, LenOldStr: integer; Res:
+                TWideString;
+     <br> begin
+     <br> &nbsp; LenOldStr := Length(oldStr);
+     <br> &nbsp; Res := TWideString.Create;
+     <br> &nbsp; PosOfNextSearch := 1;
+     <br> &nbsp; repeat
+     <br> &nbsp;&nbsp; PosOfOldStr := WidePosEx(oldStr, Source, PosOfNextSearch);
+     <br> &nbsp;&nbsp; if PosOfOldStr = 0 then break;
+     <br> &nbsp;&nbsp; Res.Append(copy(Source, PosOfNextSearch, PosOfOldStr
+                - PosOfNextSearch));
+     <br> &nbsp;&nbsp; Res.Append(newStr);
+     <br> &nbsp;&nbsp; PosOfNextSearch := PosOfOldStr + LenOldStr;
+     <br> &nbsp; until PosOfOldStr = 0;
+     <br> &nbsp; //till end of line
+     <br> &nbsp; Res.Append(copy(Source, PosOfNextSearch, maxInt));
+     <br> &nbsp; {result}ReplaceStr := Res.Text;
+     <br> &nbsp; Res.Destroy;
+     <br> end;
+    </code> </p>
+
+   <p> Для тестирования я использовал похожий на xml текст размером
+            1Мб. </p>
+
+   <p class="sel">
+    <code>
+     //usual making long text
+     <br> t0 := Time;
+     <br> for i := 1 to 50000 do txt := txt + 'A1="2345" ';
+     <br> dt0 := Time - t0;
+     <br> //usual change of substring
+     <br> t0 := Time;
+     <br> txt := AnsiReplaceStr(txt, '23', '67');
+     <br> dt1 := Time - t0;
+     <br> //fast algorithm
+     <br> t0 := Time;
+     <br> txt := ReplaceStr(txt, '45', '89');
+     <br> dt2 := Time - t0;
+    </code> </p>
+
+   <p> В этом примере на моём РС получилось
+    <br> dt0 = 41 секунда
+    <br> dt1 = 59 секунд
+    <br> dt2 = 0.1 секунды </p>
+
+   <p> Теперь ясно, что самый обычный способ создания текста в цикле
+    <br> <code class="sel big">
+     txt := txt + 'A1="2345" '
+    </code>
+    <br> медленный, и его можно было бы ускорить, используя
+    <code class="sel big">
+     TWideString
+    </code>
+    . Также можно ускорить функцию
+    <a href="RemoveCrLfTabDSpace.html">
+     RemoveCrLfTabDSpace. </a> </p>
+  </main>
+
+  <div id="menu">
+  </div>
+
+  <footer>
+  </footer>
+
+  <noscript>
+   <div>
+    
+   </div> </noscript>
+ </body>
+</html>

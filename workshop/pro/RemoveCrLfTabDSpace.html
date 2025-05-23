@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+ <head>
+  <title> RemoveCrLfTabDspace Удаление разделителей в строке </title>
+  <meta content="Перед разбором текста полезно удалить из него лишние пробелы и переводы строк." name="description">
+  <meta content="delphi, делфи, парсинг, программирование, строки," name="keywords">
+  <meta content="Евгений Корниенко" name="author">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta charset="utf-8">
+  <link href="https://cord70.github.io/photo/workshop/pro/RemoveCrLfTabDSpace.html" rel="canonical">
+  <link href="https://cord70.github.io/photo/favicon.svg" rel="icon" sizes="any" type="image/svg+xml">
+  <link href="../../images/main.css" rel="stylesheet">
+  <script defer="" src="navPro.js"> </script>
+  <script defer="" src="../../images/ansimeta.js"> </script>
+ </head>
+ <body>
+
+  <header>
+  </header>
+
+  <main>
+
+   <h2> RemoveCrLfTabDSpace </h2>
+
+   <p> Для упрощения разбора текста бывает полезно удалить из него
+            разделители. Функция
+    <code class="sel big">
+     RemoveCrLfTabDSpace
+    </code>
+    удаляет символы
+    <code class="sel big">
+     Cr=#13, Lf=#10,
+                Tab=#9
+    </code>
+    , двойные пробелы, и вообще все невидимые символы
+            с кодом меньше, чем у пробела. Такие же символы на концах строки
+            удаляет стандартная функция
+    <code class="sel big">
+     Trim
+    </code> </p>
+
+   <p class="sel">
+    <code>
+     function RemoveCrLfTabDSpace(Source: WideString):
+                WideString;
+     <br> var p: integer; Res: WideString; C: WideChar;
+     <br> begin
+     <br> &nbsp; Res := '';
+     <br> &nbsp; for p := 1 to Length(Source) do
+     <br> &nbsp; begin
+     <br> &nbsp;&nbsp; C := Source[p];
+     <br> &nbsp;&nbsp; if C &lt; Space then C := Space; //Space =
+                #32
+     <br> &nbsp;&nbsp; if (p = 1) then
+     <br> &nbsp;&nbsp;&nbsp; Res := Res + C
+     <br> &nbsp;&nbsp; else
+     <br> &nbsp;&nbsp; if Res[Length(Res)] &lt;&gt; Space then
+     <br> &nbsp;&nbsp;&nbsp; Res := Res + C
+     <br> &nbsp;&nbsp; else
+     <br> &nbsp;&nbsp; if C &lt;&gt; Space then
+     <br> &nbsp;&nbsp;&nbsp; Res := Res + C;
+     <br> &nbsp; end;
+     <br> &nbsp; {result}RemoveCrLfTabDSpace := Res;
+     <br> end;
+    </code> </p>
+
+   <p> Эта функция иногда называется
+    <code class="sel big">
+     TrimAll
+    </code>
+    . Кажется, что алгоритм достаточно оптимальный, но всё
+            же его можно ускорить для большого текста с большим числом разделителей.
+            Метод ускорения описан на примере функции
+    <a href="ReplaceStr.html">
+     ReplaceStr </a>
+    где используется класс
+    <code class="sel big">
+     TWideString
+    </code>
+    . Более быстрая функция
+    <code class="sel big">
+     RemoveCrLfTabDSpace
+    </code>
+    выглядит так: </p>
+
+   <p class="sel">
+    <code>
+     function RemoveCrLfTabDSpace(Source: WideString):
+                WideString;
+     <br> var p: integer; Res: TWideString; C: WideChar;
+     <br> begin
+     <br> &nbsp; Res := TWideString.Create;
+     <br> &nbsp; for p := 1 to Length(Source) do
+     <br> &nbsp; begin
+     <br> &nbsp;&nbsp; C := Source[p];
+     <br> &nbsp;&nbsp; if C &lt; Space then C := Space;
+     <br> &nbsp;&nbsp; if (p = 1) then
+     <br> &nbsp;&nbsp;&nbsp; Res.Append(C)
+     <br> &nbsp;&nbsp; else
+     <br> &nbsp;&nbsp; if Res[Length(Res)] &lt;&gt; Space then
+     <br> &nbsp;&nbsp;&nbsp; Res.Append(C)
+     <br> &nbsp;&nbsp; else
+     <br> &nbsp;&nbsp; if C &lt;&gt; Space then
+     <br> &nbsp;&nbsp;&nbsp; Res.Append(C);
+     <br> &nbsp; end;
+     <br> &nbsp; {result}RemoveCrLfTabDSpace := Res.Text;
+     <br> &nbsp; Res.Destroy;
+     <br> end;
+    </code> </p>
+
+   <p> По сравнению с обычным использованием строки
+    <code class="sel big">
+     WideString
+    </code>
+    из Delphi 7 алгоритм с использованием
+    <code class="sel big">
+     TWideString
+    </code>
+    может работать в сто
+            раз быстрее. Пример есть на страничке
+    <a href="ReplaceStr.html">
+     ReplaceStr. </a> </p>
+  </main>
+
+  <div id="menu">
+  </div>
+
+  <div class="foot1 ref">
+   <p> <a href="https://ru.wikipedia.org/wiki/Trim_(программирование)">
+     Trim </a>
+    - строковая функция </p>
+  </div>
+
+  <footer>
+  </footer>
+
+  <noscript>
+   <div>
+    
+   </div> </noscript>
+ </body>
+</html>
