@@ -1,0 +1,27 @@
+var menu='\
+<h4><a href="../index.html"> Насекомые</a></h4>\
+<h4><a href="index.html"> Бабочки</a></h4>\
+  <p><a href="polyommatus-icarus.html"> Голубянка Икар</a></p>\
+  <p><a href="small-blue.html"> Малая голубянка</a></p>\
+  <p><a href="white.html"> Белая бабочка</a></p>\
+  <p><a href="caterpillar-feeds.html"> Худая гусеница</a></p>\
+  <p><a href="orange-moth.html"> Оранжевая моль</a></p>\
+  <p><a href="young-caterpillar.html"> Зелёненькая гусеница</a></p>\
+  <p><a href="yellow-flower.html"> Палевая Голубянка</a></p>\
+  <p><a href="spotted-orange.html"> Бабочка</a></p>\
+  <p><a href="blue.html"> Голубянка</a></p>\
+  <p><a href="green-caterpillar.html"> Зелёная гусеница</a></p>';
+
+var menuen='\
+<h4><a href="../en.html"> Insect</a></h4>\
+<h4><a href="en.html"> Butterflies</a></h4>\
+  <p><a href="polyommatus-icarus-en.html"> Common blue</a></p>\
+  <p><a href="small-blue-en.html"> Small Blue</a></p>\
+  <p><a href="white-en.html"> White butterfly</a></p>\
+  <p><a href="caterpillar-feeds-en.html"> Slim caterpillar</a></p>\
+  <p><a href="orange-moth-en.html"> An orange moth</a></p>\
+  <p><a href="young-caterpillar-en.html"> Green caterpillar</a></p>\
+  <p><a href="blue-en.html"> Blue butterfly</a></p>\
+  <p><a href="green-caterpillar-en.html"> Fat caterpillar</a></p>\
+  <p><a href="spotted-orange-en.html"> Orange rim butterfly</a></p>\
+  <p><a href="yellow-flower-en.html"> Butterfly on flower</a></p>';
