@@ -1,0 +1,25 @@
+var menu='\
+<h4><a href="index.html"> Крит</a></h4>\
+  <p><a href="greek-door.html"> Старинная дверь</a></p>\
+  <p><a href="sunset1.html"> Заход над морем</a></p>\
+  <p><a href="octopus_swims.html"> Осьминог плывёт</a></p>\
+  <p><a href="octopus_young.html"> Осьминожек на дне</a></p>\
+  <p><a href="tourist_ship.html"> Кораблик для туристов</a></p>\
+  <p><a href="plaice_in_sand.html"> Камбала прячется</a></p>\
+  <p><a href="sunset.html"> Ещё закат над морем</a></p>\
+  <p><a href="geese-at-lake.html"> Гуси в озере</a></p>\
+  <p><a href="sea_view.html"> Вид с набережной</a></p>\
+  <p><a href="retsina.html"> Критская Рецина</a></p>';
+
+var menuen='\
+<h4><a href="en.html"> Crete</a></h4>\
+  <p><a href="greek-door-en.html"> Old door</a></p>\
+  <p><a href="geese-at-lake-en.html"> Geese at a lake</a></p>\
+  <p><a href="octopus_swims-en.html"> Octopus swims</a></p>\
+  <p><a href="retsina-en.html"> Retsina</a></p>\
+  <p><a href="tourist_ship-en.html"> Tourist ship</a></p>\
+  <p><a href="sea_view-en.html"> View of sea</a></p>\
+  <p><a href="plaice_in_sand-en.html"> Plaice</a></p>\
+  <p><a href="sunset-en.html"> Sunset</a></p>\
+  <p><a href="octopus_young-en.html"> Little octopus</a></p>\
+  <p><a href="sunset1-en.html"> Sunset</a></p>';
