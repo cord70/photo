@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title> Accumulator capacity meter </title>
+  <meta content="Capacity is electric charge Q of a new battery or a fully charged accumulator. Q=I&times;T. In this scheme time T is measured by a cheap clock. Discharge stops automatically." name="description">
+  <meta content="286, 316, A316, accu, a-hour, amount of electricity, battery, charge, check, discharge, measuring, Micro, Mignon, multimeter, quality, R03, R6, акб," name="keywords">
+  <meta content="Eugene Kornienko" name="author">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta charset="utf-8">
+  <link href="https://cord70.github.io/photo/workshop/accu-capacity-en.html" hreflang="en" rel="alternate">
+  <link href="https://cord70.github.io/photo/workshop/accu-capacity.html" hreflang="ru" rel="alternate">
+  <link href="https://cord70.github.io/photo/workshop/accu-capacity-en.html" rel="canonical">
+  <link href="https://cord70.github.io/photo/favicon.svg" rel="icon" sizes="any" type="image/svg+xml">
+  <link href="../images/main.css" rel="stylesheet">
+  <script defer="" src="navWorkshop.js"> </script>
+  <script defer="" src="../images/ansimeta.js"> </script>
+ </head>
+ <body>
+
+  <header>
+  </header>
+
+  <main>
+
+   <h2> Simple Accumulator Capacity Meter </h2>
+
+   <h3> What is accumulator capacity? How may you measure the capacity? </h3>
+
+   <p> Capacity is electric charge
+    <b> Q </b> of a new battery or
+            a fully charged accumulator. Electric charge (amount of electricity)
+            is measured in units Coulomb.
+    <span class="formula">
+     1 Coulomb
+                = 1 Ampere &times; 1 second </span> . Usually capacity is measured
+            in units
+    <span class="formula">
+     ampere&middot;hour </span> or
+    <a title="1 ma-hour = 3.6 Coulomb">
+     <span class="formula">
+      ma&middot;hour </span> . </a>
+    Normal capacity of
+    <a href="accu-meter2.html">
+     AAA </a>
+    size accumulator is 1000
+            ma&middot;hour, of
+    <a href="accu-meter2.html">
+     AA </a>
+    size is 2000 ma&middot;hour.
+            An accumulator of 1000 ma&middot;hour can deliver 1000ma current
+            during 1 hour or 100ma during 10 hours. Total electric energy
+            stored in accumulator is
+    <span class="formula">
+     E = Q &times;
+                U </span> where
+    <b> U </b> is voltage. </p>
+
+   <p> To determine capacity of an accumulator firstly you need to
+            full charge it. Then the accumulator is discharging with some
+            current
+    <b> I </b> . While accumulator is discharging the accumulator
+            voltage is decreasing from initial V0 to voltage of full discharge
+            Vmin. (Less voltage may damage accumulator) This moment the discharge
+            should be terminated. Interval of time
+    <b> T </b> , from start
+            to end of discharge, and current
+    <b> I </b> give us the accumulator
+            capacity
+    <span class="formula">
+     Q = I &times; T </span> . Same
+            way we may measure capacity of an (unchargeable) battery. After
+            full discharge an accumulator it may be charged again, but battery
+            may not be used. Capacity of the battery is capacity of the same
+            new batteries of the same sort. Meanwhile capacity of alcaline
+            battery is about equal to capacity of NiMh accumulator of the
+            same size AA(2000 ma&middot;hour), AAA(1000 ma&middot;hour). </p>
+
+   <h4> The scheme for measuring of capacity </h4>
+
+   <p class="right">
+    <img alt="Accumulator capacity
+      meter within a clock, connector for an AA cell" height="100" src="200/clock-electric-timer.jpg" title="You may
+      place the device into a clock" width="200"> </p>
+
+   <p> The proposed scheme discharges an accumulator through a resistor
+    <b> R </b> to a voltage approximately 1 volt that corresponds
+            to "flat" cell. The current of discharge is
+    <span class="formula">
+     I = U / R </span> . To measure the discharge time interval
+    <b> T </b> usual electric clock is used, which working voltage is
+            1.5-2.5V. Solid state relays
+    <a href="images/pvn012.pdf" title="pdf datasheet 200Kb">
+     PVN012 </a>
+    protects the accumulator from full discharge. It disconnects
+            the battery when the voltage drops to
+    <span class="formula">
+     Ue
+                = 1V </span> . </p>
+
+   <p class="center">
+    <a href="accu-meter-circuitry-en.html">
+     <img alt="A circuit of Accumulator
+      capacity meter" height="616" src="images/accumulator-meter.png" title="Accumulator capacity meter discharges the
+      accumulator to 1.1 V and measures the time of the discharge." width="612"> </a> </p>
+
+   <p class="rightc">
+    <a href="accu-meter2-en.html">
+     <img alt="Accu meter in a case of an
+      accu charger" height="150" src="200/accumeter2.jpg" title="Simple scheme for accumulators AA, AAA" width="200">
+     <br> Accu meter in a charger </a> </p>
+
+   <p> Charge an accumulator entirely, connect it to the device,
+            set the clock to 0, and depress
+    <b> Start </b> . The relay
+    <a href="images/pvn012.pdf" title="pdf datasheet">
+     PVN012 </a>
+    opens the circuit when the accumulator voltage decreases to 1V.
+            If you need the discharge current to be 1A, merely use the resistor
+            R=1.2 Ohm. Carefully check the contacts. They may steal 0.1V or
+            more, so the accuracy of the measurement decreases. </p>
+
+   <p> If you only want to check your cells of AA or AAA size, it's
+            a good idea to place the scheme in a case of a simple accu charger
+            with good copper contacts like it is seen on the photo. </p>
+
+   <blockquote>
+    <p> FAQ </p>
+
+    <p> <b> I need to measure capacity of an accumulator battery with
+                    sum voltage 8.4 V. </b> <br> ANSWER: Use an adapter like that is shown on the picture.
+                The two resistors should provide needed current. Additional resistor
+                divides voltage to approximately 1V on R at the moment when we
+                must terminate the discharge. </p>
+
+    <p> <b> Indeed, I need the circuit to test one accumulator? </b> <br> ANSWER: Charge the accumulator, connect it to a resistor
+     <b> R </b> and a voltmeter, then watch a clock. After some time
+     <b> T </b> the voltage
+     <b> U </b> decreases to "Voltage of
+                almost full discharge" for this type of accumulator. This
+                moment do disconnect the resistor. The capacity is
+     <b> T*U/R </b> . </p>
+
+    <p> <b> Why two diods? </b> <br> ANSWER: They and the resistor 5 Ohm prevent too big current
+                through the relay. If you use only 1.2V cells, you may remove
+                the diods from the circuit. </p>
+
+    <p> <b> Why is the new circuit better than
+      <a href="images/accu-meter-2004.gif">
+       old circuit </a>
+      ? </b> <br> ANSWER: (a) The clock gets 2.6-2.2V. (b) Both cells switch
+                off automatically. (c) Two diods KC107A or C6041 (1.4V) prevent
+                too big control current. </p>
+
+    <p> <b> Is there a picture of wire-arrangement? </b> <br> ANSWER: I use the
+     <a href="accu-meter-circuitry-en.html">
+      very this Accumulator
+                    capacity meter </a>
+     once a year to check my 30-40 NiMh elements. </p>
+   </blockquote>
+
+   <p class="cr">
+    <a href="../post/email-en.html" rel="author">
+     Eugene Kornienko </a> </p>
+
+   <p> 2004 </p>
+  </main>
+
+  <div id="menu">
+  </div>
+
+  <footer>
+  </footer>
+
+  <noscript>
+   <div>
+    
+   </div> </noscript>
+ </body>
+</html>
