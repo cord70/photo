@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+ <head>
+  <title> температура и пр. </title>
+  <style type="text/css">
+   p {
+            float: left;
+            border: 1px solid #E0F0E0;
+            padding: 2px;
+            margin: 0;
+        }
+  </style>
+  <script>
+   var date = new Date();
+        var hour = date.getHours();
+        function pic(url) { document.plot.src = url; }
+        function nextphoto(dh) { date.setHours(1 * hour + dh); showphoto(); }
+        function showphoto() {
+            year = date.getFullYear();
+            month = date.getMonth() + 1; if (month < 10) month = '0' + month;
+            day = date.getDate(); if (day < 10) day = '0' + day;
+            hour = date.getHours(); if (hour < 10) hour = '0' + hour;
+            photourl = photoname + '_' + year + '-' + month + '-' + day + '_' + hour + 'h' + photoext;
+            document.photo.src = photourl;
+            photourl = photourl.substring(photourl.lastIndexOf('/') + 1, 999);
+            document.photo.alt = photourl;
+            document.getElementById('phototitle').innerHTML = photourl;
+        } </script>
+  <meta content="300" http-equiv="refresh">
+  <meta charset="utf-8">
+  <link href="https://cord70.github.io/photo/favicon.svg" rel="icon" sizes="any" type="image/svg+xml">
+ </head>
+ <body>
+  <div style="width:600px;float:left;">
+   <a href="./">
+    <img height="450" name="plot" src="week.gif" width="600"> </a>
+   <br> <script>
+    var photosrc = document.photo.src;
+            var photoname = photosrc.substring(0, photosrc.lastIndexOf('.'));
+            var photoext = photosrc.substring(photosrc.lastIndexOf('.'), 999); </script>
+   <p> 2016-08-10 16:05
+    <br> T1
+    <span style="color:#000000;font-weight:bold;">
+     = 22.8
+                гр | под крыльцом </span> <br> T2
+    <span style="color:#800000;font-weight:bold;">
+     = 18.3
+                гр | под кладовкой </span> <br> T6
+    <span style="color:#008000;font-weight:bold;">
+     = 17.1
+                гр | труба кухни </span> <br> T8
+    <span style="color:#808000;font-weight:bold;">
+     = 29.0
+                гр | потолок </span> <br> A1
+    <span style="color:#000080;font-weight:bold;">
+     = 1.6 A
+                | ток </span> <br> <br> O1
+    <span style="color:#000000;">
+     = 0 | Главный вкл. </span> <br> O2
+    <span style="color:#000000;">
+     = 0 | Пруд </span> <br> O3
+    <span style="color:#000000;">
+     = 0 | Циркуляция </span> <br> O6
+    <span style="color:#000000;">
+     = 0 | Греющий кабель </span> <br> O8
+    <span style="color:#000000;">
+     = 1 | Вентилятор </span> <br> P1
+    <span style="color:#000000;">
+     = 1 | O6 T4=3-20 </span> <br> P2
+    <span style="color:#000000;">
+     = 1 | O3 T6=3-6 </span> <br> P3
+    <span style="color:#000000;">
+     = 1 | O8 T1=15-10 </span> <br> P4
+    <span style="color:#000000;">
+     = 0 | O1 Главный вкл </span> <br> P5
+    <span style="color:#000000;">
+     = 0 | O3 Циркуляция </span> <br> P6
+    <span style="color:#000000;">
+     = 1 | O1 T8=6-12 </span> <br> P7
+    <span style="color:#000000;">
+     = 0 | O2 Пруд </span> <br> P8
+    <span style="color:#000000;">
+     = 1 | O2 Т1=0-3 </span> <br> P9
+    <span style="color:#000000;">
+     = 1 | O2 10h-13h </span> </p>
+
+   <p> <a href="javascript:pic('day.gif')" title="День">
+     <img height="112" src="day.gif" width="150"> </a> </p>
+
+   <p> <a href="javascript:pic('week.gif')" title="Неделя">
+     <img height="112" src="week.gif" width="150"> </a> </p>
+
+   <p> <a href="javascript:pic('month.gif')" title="Месяц">
+     <img height="112" src="month.gif" width="150"> </a> </p>
+
+   <p> <a href="javascript:pic('year.gif')" title="Год">
+     <img height="112" src="year.gif" width="150"> </a> </p>
+  </div>
+ </body>
+</html>

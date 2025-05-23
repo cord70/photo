@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <title>Обновить команду</title>
+
+    <meta name="description" content="Умная дача">
+
+    <link href="https://cord70.github.io/photo/favicon.svg" type="image/svg+xml" sizes="any" rel="icon">
+    <link rel="stylesheet" href="../images/main.css">
+
+    <meta name="robots" content="noindex, nofollow" />
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <p>Current time
+        <?php echo date("Y-m-d H:i"); ?></p>
+
+    <p>Current command
+        <?php
+        $filename = 'templist.txt';
+        $com = $_POST['someText'];
+        if (isset($com))
+        if ($com!='')
+        {
+        if (!($fstm = fopen($filename, "w+")))
+        { echo "can't open file".$guests_file; }
+        else
+        { fwrite($fstm, $com);
+        fclose($fstm);
+        }
+        }
+        $text=file_get_contents($filename);
+        $text=str_replace('"','&quot;', $text);
+        echo $text;
+        ?></p>
+
+    <form method="POST" action="on.html">
+        <?php
+        echo '<input name="someText" type="text" value="';
+    echo $text;
+    echo '" />';
+        ?>
+        <input type="submit" value="Update command" />
+    </form>
+</body>
+</html>
+
