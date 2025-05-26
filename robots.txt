@@ -1,4 +1,2 @@
 User-Agent: *
 Disallow: /da4a/
-Disallow: 
-Host: https://cord70.github.io/photo
