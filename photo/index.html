@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru">
  <head>
+
+   <script type="text/javascript"> 
+     // переход с адреса ../ на ../index.html
+     var thispage="photo";
+     url=   window.location.href;     
+     if(url.endsWith(thispage)) {url=url+"/index.html";  window.location.href = url; }
+     if(url.endsWith(thispage+"/")) {url=url+"index.html";  window.location.href = url; }
+   </script>
+
+  <meta charset="utf-8">
   <title> Мои удачные фотографии (Интересная природа) </title>
   <meta content="Фотографии живой и просто красивой природы - цветы и деревья, насекомые и животные, Солнце и Луна. Главное - вовремя нажать кнопку." name="description">
   <meta content="море, небо, подводные, природа, съёмка, фотография," name="keywords">
   <meta content="Евгений Корниенко" name="author">
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta charset="utf-8">
   <link href="https://cord70.github.io/photo/photo/en.html" hreflang="en" rel="alternate">
   <link href="https://cord70.github.io/photo/photo/index.html" hreflang="ru" rel="alternate">
   <link href="https://cord70.github.io/photo/photo/index.html" rel="canonical">
